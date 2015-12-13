@@ -19,6 +19,7 @@
 
 #include <Python.h>
 #include <gur.hpp>
+#include <sstream>
 
 template<typename T>
 PyObject* tuple_of_word(PyObject *args, T method)
@@ -71,6 +72,40 @@ static PyObject* gp_comp(PyObject *self, PyObject *args)
 	return tuple_of_word(args, &gur::Word::composition);
 }
 
+static PyObject* gp_clobber(PyObject *self, PyObject *args)
+{
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	gur::Word word(str);
+	std::ostringstream oss;
+	oss << word;
+
+	return PyUnicode_FromString(oss.str().c_str());
+}
+
+static PyObject* gp_unclobber(PyObject *self, PyObject *args)
+{
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	gur::Word word(str);
+	std::ostringstream oss(std::ostringstream::ate);
+
+	for (auto &c : word)
+	{
+		oss << c;
+	}
+
+	return PyUnicode_FromString(oss.str().c_str());
+}
+
 static PyMethodDef gp_methods[] =
 {
 	{"letters", gp_letters, METH_VARARGS, "Get the letters in a word."},
@@ -79,6 +114,8 @@ static PyMethodDef gp_methods[] =
 	{"digits", gp_digits, METH_VARARGS, "Get the digits in a word."},
 	{"symbols", gp_symbols, METH_VARARGS, "Get the symbols in a word."},
 	{"comp", gp_comp, METH_VARARGS, "Get a word's composition."},
+	{"clobber", gp_clobber, METH_VARARGS, "Combine diacritics."},
+	{"unclobber", gp_unclobber, METH_VARARGS, "Separate diacritics."},
 	{NULL, NULL, 0, NULL}
 };
 
