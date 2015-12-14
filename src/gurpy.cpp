@@ -20,10 +20,8 @@
 #include <Python.h>
 #include <gur.hpp>
 #include <gurmukhi.hpp>
-#include <sstream>
 
-template<typename T>
-PyObject* tuple_of_word(PyObject *args, T method)
+static PyObject* gp_letters(PyObject *self, PyObject *args)
 {
 	const char* str;
 	if (!PyArg_ParseTuple(args, "s", &str))
@@ -31,46 +29,62 @@ PyObject* tuple_of_word(PyObject *args, T method)
 		return NULL;
 	}
 
-	gur::Word word = (gur::Word(str).*method)();
-	PyObject *py_word = PyTuple_New(word.size());
-
-	for (std::size_t i = 0; i != word.size(); ++i)
-	{
-		PyTuple_SetItem(py_word, i, PyUnicode_FromString(
-			word[i].str().c_str()));
-	}
-
-	return py_word;
-}
-
-static PyObject* gp_letters(PyObject *self, PyObject *args)
-{
-	return tuple_of_word(args, &gur::Word::letters);
+	return PyUnicode_FromString(gur::letters(str));
 }
 
 static PyObject* gp_accents(PyObject *self, PyObject *args)
 {
-	return tuple_of_word(args, &gur::Word::accents);
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	return PyUnicode_FromString(gur::accents(str));
 }
 
 static PyObject* gp_puncs(PyObject *self, PyObject *args)
 {
-	return tuple_of_word(args, &gur::Word::punctuations);
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	return PyUnicode_FromString(gur::puncs(str));
 }
 
 static PyObject* gp_digits(PyObject *self, PyObject *args)
 {
-	return tuple_of_word(args, &gur::Word::digits);
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	return PyUnicode_FromString(gur::digits(str));
 }
 
 static PyObject* gp_symbols(PyObject *self, PyObject *args)
 {
-	return tuple_of_word(args, &gur::Word::symbols);
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	return PyUnicode_FromString(gur::symbols(str));
 }
 
 static PyObject* gp_comp(PyObject *self, PyObject *args)
 {
-	return tuple_of_word(args, &gur::Word::composition);
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	return PyUnicode_FromString(gur::comp(str));
 }
 
 static PyObject* gp_clobber(PyObject *self, PyObject *args)
@@ -81,11 +95,7 @@ static PyObject* gp_clobber(PyObject *self, PyObject *args)
 		return NULL;
 	}
 
-	gur::Word word(str);
-	std::ostringstream oss;
-	oss << word;
-
-	return PyUnicode_FromString(oss.str().c_str());
+	return PyUnicode_FromString(gur::clobber(str));
 }
 
 static PyObject* gp_unclobber(PyObject *self, PyObject *args)
@@ -96,15 +106,7 @@ static PyObject* gp_unclobber(PyObject *self, PyObject *args)
 		return NULL;
 	}
 
-	gur::Word word(str);
-	std::ostringstream oss(std::ostringstream::ate);
-
-	for (auto &c : word)
-	{
-		oss << c;
-	}
-
-	return PyUnicode_FromString(oss.str().c_str());
+	return PyUnicode_FromString(gur::unclobber(str));
 }
 
 static PyMethodDef gp_methods[] =
