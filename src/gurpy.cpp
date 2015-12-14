@@ -19,6 +19,7 @@
 
 #include <Python.h>
 #include <gur.hpp>
+#include <gurmukhi.hpp>
 #include <sstream>
 
 template<typename T>
@@ -130,5 +131,106 @@ static struct PyModuleDef gp_module =
 
 PyMODINIT_FUNC PyInit_gurpy(void)
 {
-	return PyModule_Create(&gp_module);
+	PyObject *mod = PyModule_Create(&gp_module);
+
+	PyObject_SetAttrString(mod, "a1", PyUnicode_FromString(gur::A1));
+	PyObject_SetAttrString(mod, "a2", PyUnicode_FromString(gur::A2));
+	PyObject_SetAttrString(mod, "a3", PyUnicode_FromString(gur::A3));
+	PyObject_SetAttrString(mod, "a4", PyUnicode_FromString(gur::A4));
+	PyObject_SetAttrString(mod, "a5", PyUnicode_FromString(gur::A5));
+
+	PyObject_SetAttrString(mod, "b1", PyUnicode_FromString(gur::B1));
+	PyObject_SetAttrString(mod, "b2", PyUnicode_FromString(gur::B2));
+	PyObject_SetAttrString(mod, "b3", PyUnicode_FromString(gur::B3));
+	PyObject_SetAttrString(mod, "b4", PyUnicode_FromString(gur::B4));
+	PyObject_SetAttrString(mod, "b5", PyUnicode_FromString(gur::B5));
+
+	PyObject_SetAttrString(mod, "c1", PyUnicode_FromString(gur::C1));
+	PyObject_SetAttrString(mod, "c2", PyUnicode_FromString(gur::C2));
+	PyObject_SetAttrString(mod, "c3", PyUnicode_FromString(gur::C3));
+	PyObject_SetAttrString(mod, "c4", PyUnicode_FromString(gur::C4));
+	PyObject_SetAttrString(mod, "c5", PyUnicode_FromString(gur::C5));
+
+	PyObject_SetAttrString(mod, "d1", PyUnicode_FromString(gur::D1));
+	PyObject_SetAttrString(mod, "d2", PyUnicode_FromString(gur::D2));
+	PyObject_SetAttrString(mod, "d3", PyUnicode_FromString(gur::D3));
+	PyObject_SetAttrString(mod, "d4", PyUnicode_FromString(gur::D4));
+	PyObject_SetAttrString(mod, "d5", PyUnicode_FromString(gur::D5));
+
+	PyObject_SetAttrString(mod, "e1", PyUnicode_FromString(gur::E1));
+	PyObject_SetAttrString(mod, "e2", PyUnicode_FromString(gur::E2));
+	PyObject_SetAttrString(mod, "e3", PyUnicode_FromString(gur::E3));
+	PyObject_SetAttrString(mod, "e4", PyUnicode_FromString(gur::E4));
+	PyObject_SetAttrString(mod, "e5", PyUnicode_FromString(gur::E5));
+
+	PyObject_SetAttrString(mod, "f1", PyUnicode_FromString(gur::F1));
+	PyObject_SetAttrString(mod, "f2", PyUnicode_FromString(gur::F2));
+	PyObject_SetAttrString(mod, "f3", PyUnicode_FromString(gur::F3));
+	PyObject_SetAttrString(mod, "f4", PyUnicode_FromString(gur::F4));
+	PyObject_SetAttrString(mod, "f5", PyUnicode_FromString(gur::F5));
+
+	PyObject_SetAttrString(mod, "g1", PyUnicode_FromString(gur::G1));
+	PyObject_SetAttrString(mod, "g2", PyUnicode_FromString(gur::G2));
+	PyObject_SetAttrString(mod, "g3", PyUnicode_FromString(gur::G3));
+	PyObject_SetAttrString(mod, "g4", PyUnicode_FromString(gur::G4));
+	PyObject_SetAttrString(mod, "g5", PyUnicode_FromString(gur::G5));
+
+	PyObject_SetAttrString(mod, "h1", PyUnicode_FromString(gur::H1));
+	PyObject_SetAttrString(mod, "h2", PyUnicode_FromString(gur::H2));
+	PyObject_SetAttrString(mod, "h3", PyUnicode_FromString(gur::H3));
+	PyObject_SetAttrString(mod, "h4", PyUnicode_FromString(gur::H4));
+	PyObject_SetAttrString(mod, "h5", PyUnicode_FromString(gur::H5));
+
+	PyObject_SetAttrString(mod, "i1", PyUnicode_FromString(gur::I1));
+	PyObject_SetAttrString(mod, "i2", PyUnicode_FromString(gur::I2));
+	PyObject_SetAttrString(mod, "i3", PyUnicode_FromString(gur::I3));
+	PyObject_SetAttrString(mod, "i4", PyUnicode_FromString(gur::I4));
+	PyObject_SetAttrString(mod, "i5", PyUnicode_FromString(gur::I5));
+
+	PyObject_SetAttrString(mod, "j1", PyUnicode_FromString(gur::J1));
+	PyObject_SetAttrString(mod, "j2", PyUnicode_FromString(gur::J2));
+	PyObject_SetAttrString(mod, "j3", PyUnicode_FromString(gur::J3));
+	PyObject_SetAttrString(mod, "j4", PyUnicode_FromString(gur::J4));
+	PyObject_SetAttrString(mod, "j5", PyUnicode_FromString(gur::J5));
+
+	PyObject_SetAttrString(mod, "k1", PyUnicode_FromString(gur::K1));
+	PyObject_SetAttrString(mod, "k2", PyUnicode_FromString(gur::K2));
+	PyObject_SetAttrString(mod, "k3", PyUnicode_FromString(gur::K3));
+	PyObject_SetAttrString(mod, "k4", PyUnicode_FromString(gur::K4));
+	PyObject_SetAttrString(mod, "k5", PyUnicode_FromString(gur::K5));
+
+	PyObject_SetAttrString(mod, "l1", PyUnicode_FromString(gur::L1));
+	PyObject_SetAttrString(mod, "l2", PyUnicode_FromString(gur::L2));
+	PyObject_SetAttrString(mod, "l3", PyUnicode_FromString(gur::L3));
+	PyObject_SetAttrString(mod, "l4", PyUnicode_FromString(gur::L4));
+	PyObject_SetAttrString(mod, "l5", PyUnicode_FromString(gur::L5));
+
+	PyObject_SetAttrString(mod, "m1", PyUnicode_FromString(gur::M1));
+	PyObject_SetAttrString(mod, "m2", PyUnicode_FromString(gur::M2));
+	PyObject_SetAttrString(mod, "m3", PyUnicode_FromString(gur::M3));
+	PyObject_SetAttrString(mod, "m4", PyUnicode_FromString(gur::M4));
+	PyObject_SetAttrString(mod, "m5", PyUnicode_FromString(gur::M5));
+
+	PyObject_SetAttrString(mod, "n1", PyUnicode_FromString(gur::N1));
+	PyObject_SetAttrString(mod, "n2", PyUnicode_FromString(gur::N2));
+	PyObject_SetAttrString(mod, "n3", PyUnicode_FromString(gur::N3));
+	PyObject_SetAttrString(mod, "n4", PyUnicode_FromString(gur::N4));
+	PyObject_SetAttrString(mod, "n5", PyUnicode_FromString(gur::N5));
+
+	PyObject_SetAttrString(mod, "o1", PyUnicode_FromString(gur::O1));
+	PyObject_SetAttrString(mod, "o2", PyUnicode_FromString(gur::O2));
+	PyObject_SetAttrString(mod, "o3", PyUnicode_FromString(gur::O3));
+	PyObject_SetAttrString(mod, "o4", PyUnicode_FromString(gur::O4));
+	PyObject_SetAttrString(mod, "o5", PyUnicode_FromString(gur::O5));
+
+	PyObject_SetAttrString(mod, "p1", PyUnicode_FromString(gur::P1));
+	PyObject_SetAttrString(mod, "p2", PyUnicode_FromString(gur::P2));
+	PyObject_SetAttrString(mod, "p3", PyUnicode_FromString(gur::P3));
+	PyObject_SetAttrString(mod, "p4", PyUnicode_FromString(gur::P4));
+	PyObject_SetAttrString(mod, "p5", PyUnicode_FromString(gur::P5));
+
+	PyObject_SetAttrString(mod, "q1", PyUnicode_FromString(gur::Q1));
+	PyObject_SetAttrString(mod, "q2", PyUnicode_FromString(gur::Q2));
+
+	return mod;
 }
