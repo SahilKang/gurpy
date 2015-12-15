@@ -109,6 +109,101 @@ static PyObject* gp_unclobber(PyObject *self, PyObject *args)
 	return PyUnicode_FromString(gur::unclobber(str));
 }
 
+static PyObject* gp_is_letter(PyObject *self, PyObject *args)
+{
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	if (gur::is_letter(str))
+	{
+		Py_RETURN_TRUE;
+	}
+
+	else
+	{
+		Py_RETURN_FALSE;
+	}
+}
+
+static PyObject* gp_is_accent(PyObject *self, PyObject *args)
+{
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	if (gur::is_accent(str))
+	{
+		Py_RETURN_TRUE;
+	}
+
+	else
+	{
+		Py_RETURN_FALSE;
+	}
+}
+
+static PyObject* gp_is_punc(PyObject *self, PyObject *args)
+{
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	if (gur::is_punc(str))
+	{
+		Py_RETURN_TRUE;
+	}
+
+	else
+	{
+		Py_RETURN_FALSE;
+	}
+}
+
+static PyObject* gp_is_digit(PyObject *self, PyObject *args)
+{
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	if (gur::is_digit(str))
+	{
+		Py_RETURN_TRUE;
+	}
+
+	else
+	{
+		Py_RETURN_FALSE;
+	}
+}
+
+static PyObject* gp_is_symbol(PyObject *self, PyObject *args)
+{
+	const char* str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	if (gur::is_symbol(str))
+	{
+		Py_RETURN_TRUE;
+	}
+
+	else
+	{
+		Py_RETURN_FALSE;
+	}
+}
+
 static PyMethodDef gp_methods[] =
 {
 	{"letters", gp_letters, METH_VARARGS, "Get the letters in a word."},
@@ -119,11 +214,16 @@ static PyMethodDef gp_methods[] =
 	{"comp", gp_comp, METH_VARARGS, "Get a word's composition."},
 	{"clobber", gp_clobber, METH_VARARGS, "Combine diacritics."},
 	{"unclobber", gp_unclobber, METH_VARARGS, "Separate diacritics."},
+	{"is_letter", gp_is_letter, METH_VARARGS, "Is string a letter?"},
+	{"is_accent", gp_is_accent, METH_VARARGS, "Is string a accent?"},
+	{"is_punc", gp_is_punc, METH_VARARGS, "Is string a punctuation?"},
+	{"is_digit", gp_is_digit, METH_VARARGS, "Is string a digit?"},
+	{"is_symbol", gp_is_symbol, METH_VARARGS, "Is string a symbol?"},
 	{NULL, NULL, 0, NULL}
 };
 
 static struct PyModuleDef gp_module =
-{	
+{
 	PyModuleDef_HEAD_INIT,
 	"gurpy", //name of the module
 	"Python extension for libgur", //module doc
