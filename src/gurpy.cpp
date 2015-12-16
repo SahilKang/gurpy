@@ -21,7 +21,20 @@
 #include <gur.hpp>
 #include <gurmukhi.hpp>
 
-static PyObject* gp_letters(PyObject *self, PyObject *args)
+template<typename T>
+static PyObject* get_func(PyObject *&args, const T &func)
+{
+	const char *str;
+	if (!PyArg_ParseTuple(args, "s", &str))
+	{
+		return NULL;
+	}
+
+	return PyUnicode_FromString(func(str));
+}
+
+template<typename T>
+static PyObject* is_type(PyObject *&args, const T &func)
 {
 	const char* str;
 	if (!PyArg_ParseTuple(args, "s", &str))
@@ -29,179 +42,88 @@ static PyObject* gp_letters(PyObject *self, PyObject *args)
 		return NULL;
 	}
 
-	return PyUnicode_FromString(gur::letters(str));
+	if (func(str))
+	{
+		Py_RETURN_TRUE;
+	}
+
+	else
+	{
+		Py_RETURN_FALSE;
+	}
+}
+
+static PyObject* gp_letters(PyObject *self, PyObject *args)
+{
+	return get_func(args,
+		(const char* (*)(const char* const&))&gur::letters);
 }
 
 static PyObject* gp_accents(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	return PyUnicode_FromString(gur::accents(str));
+	return get_func(args,
+		(const char* (*)(const char* const&))&gur::accents);
 }
 
 static PyObject* gp_puncs(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	return PyUnicode_FromString(gur::puncs(str));
+	return get_func(args,
+		(const char* (*)(const char* const&))&gur::puncs);
 }
 
 static PyObject* gp_digits(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	return PyUnicode_FromString(gur::digits(str));
+	return get_func(args,
+		(const char* (*)(const char* const&))&gur::digits);
 }
 
 static PyObject* gp_symbols(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	return PyUnicode_FromString(gur::symbols(str));
+	return get_func(args,
+		(const char* (*)(const char* const&))&gur::symbols);
 }
 
 static PyObject* gp_comp(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	return PyUnicode_FromString(gur::comp(str));
+	return get_func(args,
+		(const char* (*)(const char* const&))&gur::comp);
 }
 
 static PyObject* gp_clobber(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	return PyUnicode_FromString(gur::clobber(str));
+	return get_func(args,
+		(const char* (*)(const char* const&))&gur::clobber);
 }
 
 static PyObject* gp_unclobber(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	return PyUnicode_FromString(gur::unclobber(str));
+	return get_func(args,
+		(const char* (*)(const char* const&))&gur::unclobber);
 }
 
 static PyObject* gp_is_letter(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	if (gur::is_letter(str))
-	{
-		Py_RETURN_TRUE;
-	}
-
-	else
-	{
-		Py_RETURN_FALSE;
-	}
+	return is_type(args, (bool (*)(const char* const&))&gur::is_letter);
 }
 
 static PyObject* gp_is_accent(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	if (gur::is_accent(str))
-	{
-		Py_RETURN_TRUE;
-	}
-
-	else
-	{
-		Py_RETURN_FALSE;
-	}
+	return is_type(args, (bool (*)(const char* const&))&gur::is_accent);
 }
 
 static PyObject* gp_is_punc(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	if (gur::is_punc(str))
-	{
-		Py_RETURN_TRUE;
-	}
-
-	else
-	{
-		Py_RETURN_FALSE;
-	}
+	return is_type(args, (bool (*)(const char* const&))&gur::is_punc);
 }
 
 static PyObject* gp_is_digit(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	if (gur::is_digit(str))
-	{
-		Py_RETURN_TRUE;
-	}
-
-	else
-	{
-		Py_RETURN_FALSE;
-	}
+	return is_type(args, (bool (*)(const char* const&))&gur::is_digit);
 }
 
 static PyObject* gp_is_symbol(PyObject *self, PyObject *args)
 {
-	const char* str;
-	if (!PyArg_ParseTuple(args, "s", &str))
-	{
-		return NULL;
-	}
-
-	if (gur::is_symbol(str))
-	{
-		Py_RETURN_TRUE;
-	}
-
-	else
-	{
-		Py_RETURN_FALSE;
-	}
+	return is_type(args, (bool (*)(const char* const&))&gur::is_symbol);
 }
 
 static PyMethodDef gp_methods[] =
