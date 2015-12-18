@@ -126,6 +126,37 @@ static PyObject* gp_is_symbol(PyObject *self, PyObject *args)
 	return is_type(args, (bool (*)(const char* const&))&gur::is_symbol);
 }
 
+static PyObject* gp_sort(PyObject *self, PyObject *args)
+{
+	PyObject *py_unsorted;
+	if (!PyArg_ParseTuple(args, "O", &py_unsorted))
+	{
+		return NULL;
+	}
+
+	const Py_ssize_t size = PyTuple_Size(py_unsorted);
+
+	std::vector<std::string> unsorted;
+	for (Py_ssize_t i = 0; i != size; ++i)
+	{
+		const char* str = PyUnicode_AsUTF8(
+			PyTuple_GetItem(py_unsorted, i));
+
+		unsorted.push_back(std::string(str));
+	}
+
+	std::vector<std::string> sorted = gur::sort(unsorted);
+
+	PyObject *py_sorted = PyTuple_New(size);
+	for (Py_ssize_t i = 0; i != size; ++i)
+	{
+		PyTuple_SetItem(py_sorted, i,
+			PyUnicode_FromString(sorted[i].c_str()));
+	}
+
+	return py_sorted;
+}
+
 static PyMethodDef gp_methods[] =
 {
 	{"letters", gp_letters, METH_VARARGS, "Get the letters in a word."},
@@ -141,6 +172,7 @@ static PyMethodDef gp_methods[] =
 	{"is_punc", gp_is_punc, METH_VARARGS, "Is string a punctuation?"},
 	{"is_digit", gp_is_digit, METH_VARARGS, "Is string a digit?"},
 	{"is_symbol", gp_is_symbol, METH_VARARGS, "Is string a symbol?"},
+	{"sort", gp_sort, METH_VARARGS, "Sort tuple of words"},
 	{NULL, NULL, 0, NULL}
 };
 
