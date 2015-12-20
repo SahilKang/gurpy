@@ -22,6 +22,6 @@ tuple(gp.accents(hello_world))
 gp.puncs(hello_world)
   >'।'
 
-gp.comp(hello_world)
+tuple(gp.comp(hello_world))
   >('ਅ', 'ਸ', 'ਕ', 'ਤ', 'ਦ', 'ਨ', 'ਲ', 'ਾ', 'ਿ', 'ੀ', 'ੁ', '੍', '।', ' ')
 ```
