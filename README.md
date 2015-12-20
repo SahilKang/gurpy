@@ -24,4 +24,10 @@ gp.puncs(hello_world)
 
 tuple(gp.comp(hello_world))
   >('ਅ', 'ਸ', 'ਕ', 'ਤ', 'ਦ', 'ਨ', 'ਲ', 'ਾ', 'ਿ', 'ੀ', 'ੁ', '੍', '।', ' ')
+
+tuple(world)
+  >('ਦ', 'ੁ', 'ਨ', 'ੀ', 'ਅ', 'ਾ')
+
+tuple(gp.clobber(world))
+  >('ਦ', 'ੁ', 'ਨ', 'ੀ', 'ਆ')
 ```
