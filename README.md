@@ -14,14 +14,14 @@ hello_world = hello + ' ' + world + gp.q1
   >'ਸਤਿ ਸੀ੍ ਅਕਾਲ ਦੁਨੀਅਾ।'
 
 gp.letters(hello_world)
-  >'ਸਤਸਅਕਲਦਨਅ '
+  >'ਸਤਸਅਕਲਦਨਅ'
 
-gp.accents(hello_world)
-  >'ਿੀ੍ੁੀਾ'
+tuple(gp.accents(hello_world))
+  >('ਿ', 'ੀ', '੍', 'ਾ', 'ੁ', 'ੀ', 'ਾ')
 
 gp.puncs(hello_world)
   >'।'
 
 gp.comp(hello_world)
-  >'ਅਸਕਤਦਨਲਾਿੀੁ੍।
+  >('ਅ', 'ਸ', 'ਕ', 'ਤ', 'ਦ', 'ਨ', 'ਲ', 'ਾ', 'ਿ', 'ੀ', 'ੁ', '੍', '।', ' ')
 ```
