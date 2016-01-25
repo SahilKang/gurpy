@@ -2,15 +2,12 @@ SRCDIR = ./src
 OBJDIR = ./obj
 OUTDIR = ./bin
 
-LIBGUR_INC =# ../libgur/inc
-LIBGUR_LIBDIR =# ../libgur/bin
-
 SRCS = $(wildcard $(SRCDIR)/*.cpp $(SRCDIR)/**/*.cpp)
 
 CXX = g++
-CXXFLAGS = `python3-config --includes` -I$(LIBGUR_INC) -std=c++14 -g
+CXXFLAGS = `python3-config --includes` -std=c++14 -g
 
-LDFLAGS = `python3-config --ldflags` -L$(LIBGUR_LIBDIR) -lgur
+LDFLAGS = `python3-config --ldflags` -lgur
 
 all: gurpy.so
 
