@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright (C) 2015 Sahil Kang <sahil.kang@asilaycomputing.com>
+ * Copyright (C) 2015, 2016  Sahil Singh Kang <sahil.kang@asilaycomputing.com>
  *
  * This file is part of gurpy.
  *
@@ -20,6 +20,8 @@
 #include <Python.h>
 #include <gur.hpp>
 #include <gurmukhi.hpp>
+#include <map>
+#include <utility>
 
 template<typename T>
 static PyObject* get_func(PyObject *&args, const T &func)
@@ -145,7 +147,17 @@ static PyObject* gp_sort(PyObject *self, PyObject *args)
 		unsorted.push_back(std::string(str));
 	}
 
-	std::vector<std::string> sorted = gur::sort(unsorted);
+	std::multimap<gur::String, std::string> pairs;
+	for (auto &s : unsorted)
+	{
+		pairs.insert(std::make_pair(gur::String(s), s));
+	}
+
+	std::vector<std::string> sorted;
+	for (auto &pair : pairs)
+	{
+		sorted.push_back(pair.second);
+	}
 
 	PyObject *py_sorted = PyTuple_New(size);
 	for (Py_ssize_t i = 0; i != size; ++i)
